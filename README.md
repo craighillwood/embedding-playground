@@ -2,6 +2,8 @@
 
 Explore how a language model "sees" words. Type a word and see its nearest neighbours, compare two words, do word arithmetic like **king - man + woman = queen**, and watch it all on a 2D map.
 
+**Try it live: [embedding-playground.pages.dev](https://embedding-playground.pages.dev/)**
+
 It runs entirely in the browser using 20,000 real word vectors from [GloVe](https://nlp.stanford.edu/projects/glove/). There's no backend and no ML or math library: the vector math, the nearest-neighbour search and the 2D map are plain TypeScript loops (under 300 lines, with comments), so you can read exactly what's going on.
 
 ## How it works
