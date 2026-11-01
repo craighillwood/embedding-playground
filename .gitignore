@@ -1,0 +1,7 @@
+node_modules
+dist
+*.local
+.DS_Store
+
+# The raw GloVe download (~800 MB). Only the trimmed output in public/data is committed.
+data/raw

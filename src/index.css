@@ -1,0 +1,398 @@
+:root {
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --text: #1d1d1f;
+  --muted: #64646b;
+  --border: #e2e0da;
+  --accent: #4f46e5;
+  --accent-soft: #e8e7fc;
+  --result: #d9480f;
+  --negative: #2f6fdb;
+  --positive: #e8590c;
+  --dots: #b9b7b0;
+
+  color-scheme: light dark;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131316;
+    --surface: #1c1c21;
+    --text: #ececf0;
+    --muted: #a0a0aa;
+    --border: #2e2e36;
+    --accent: #8b85ff;
+    --accent-soft: #2a2850;
+    --result: #ff8a50;
+    --negative: #5b9bff;
+    --positive: #ff9248;
+    --dots: #4a4a54;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+a {
+  color: var(--accent);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin: 0;
+}
+
+.page-header {
+  max-width: 70ch;
+  margin-bottom: 32px;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.page-header p,
+.page-footer {
+  color: var(--muted);
+}
+
+.page-footer {
+  font-size: 0.85rem;
+  margin-top: 40px;
+}
+
+.status {
+  color: var(--muted);
+}
+
+.status.error {
+  color: var(--result);
+}
+
+/* Layout: panels on the left, the plot stays in view on the right. */
+.playground {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .playground {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.panel,
+.plot {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.panel {
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.panel.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.panel h2 {
+  font-size: 1.15rem;
+}
+
+.panel h3 {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 16px 0 4px;
+}
+
+.panel-description {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 4px 0 16px;
+}
+
+.field {
+  display: grid;
+  gap: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.field input {
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  width: 100%;
+  min-width: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.field input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Result lists */
+.neighbours {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: grid;
+  gap: 2px;
+}
+
+.neighbours li {
+  display: grid;
+  grid-template-columns: minmax(6rem, 1fr) 2fr 3.5rem;
+  align-items: center;
+  gap: 12px;
+}
+
+.neighbours li.top .word-button {
+  color: var(--result);
+  font-weight: 700;
+}
+
+.word-button {
+  font: inherit;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 2px 0;
+  color: var(--text);
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.word-button:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.bar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+
+.score {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.big-score {
+  margin: 16px 0 0;
+  color: var(--muted);
+}
+
+.big-score output {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  margin-right: 4px;
+}
+
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 10px 0 0;
+}
+
+.chip {
+  font: inherit;
+  padding: 2px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+}
+
+/* The word's raw vector */
+.vector-figure {
+  margin: 12px 0 0;
+}
+
+.vector-strip {
+  display: block;
+  width: 100%;
+  height: 20px;
+  border-radius: 4px;
+  background: var(--bg);
+}
+
+.vector-strip .negative {
+  fill: var(--negative);
+}
+
+.vector-strip .positive {
+  fill: var(--positive);
+}
+
+.vector-figure figcaption {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* Plot */
+.plot {
+  margin: 0;
+  position: sticky;
+  top: 16px;
+}
+
+.plot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.plot-header figcaption {
+  font-weight: 600;
+}
+
+.toggle {
+  display: flex;
+  gap: 12px;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.toggle legend {
+  float: left;
+  color: var(--muted);
+  margin-right: 4px;
+}
+
+.toggle label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.plot svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+  overflow: visible;
+}
+
+.background-dots {
+  stroke: var(--dots);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.point circle {
+  fill: var(--accent);
+  stroke: var(--surface);
+  stroke-width: 2;
+}
+
+.point text {
+  font-size: 13px;
+  fill: var(--text);
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.point.neighbour circle {
+  fill: var(--muted);
+}
+
+.point.neighbour text {
+  fill: var(--muted);
+  font-size: 12px;
+}
+
+.point.input text {
+  font-weight: 700;
+}
+
+.point.result circle {
+  fill: var(--result);
+}
+
+.point.result text {
+  fill: var(--result);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.plot-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 8px 0 0;
+}
