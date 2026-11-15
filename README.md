@@ -116,6 +116,8 @@ scripts/trim-glove.ts      turns the raw GloVe file into the compact format
 
 I built this with Claude (Anthropic's AI assistant) as a pair programmer, as a way to learn LLM fundamentals hands-on after watching CJ's video *LLMs Explained: Tokens, Embeddings, Transformers and More*. I directed the scope and design, tested it in the browser, and then went through the code step by step with Claude, answering check questions, until I could explain the data format, the vector math, nearest neighbours and the analogy code line by line. Along the way that review caught and fixed a few explanations that overclaimed, like what a vector's length means.
 
-## Credits
+## Licence and credits
+
+The code is released under the [MIT License](LICENSE). The word vectors in `public/data` are not covered by it: they're a trimmed copy of GloVe, which keeps its own licence below.
 
 Word vectors: GloVe 6B 50d by Jeffrey Pennington, Richard Socher and Christopher D. Manning, 2014. [GloVe: Global Vectors for Word Representation](https://nlp.stanford.edu/pubs/glove.pdf). Released under the [Public Domain Dedication and License (PDDL)](https://opendatacommons.org/licenses/pddl/1-0/).
